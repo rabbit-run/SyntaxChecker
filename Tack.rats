@@ -1,0 +1,27 @@
+//Module Intro
+Module Tack
+option parser(TackParser);
+header {import java.util.*;}
+body {public static final Set<String>
+      KEYWORDS = new HashSet<String>(Arrays.asList("if","else"));}
+//Production for syntax analysis
+
+
+//Productions for lexical analysis
+void WS = ([ \t\f\n]/COMMENT)*;
+void COMMENT = "/*"(!"*"_/"*"!"/")*"*/";
+void EOF = !_;
+String REL_OP = ("<="/"<"/">="/">");
+String ID = i:ID_INTERNAL WS
+            &{!KEYWORDS.contains(i)};
+String ID_INTERNAL = [a-zA-Z][a-zA-Z0-9]*;
+
+void IF = "if"WS;
+void ELSE = "else"WS;
+void FOR = "for"WS;
+void IN = "in"WS;
+void LPAREN = "("WS;
+void RPAREN = ")"WS;
+void SEMI = ";"WS;
+
+
